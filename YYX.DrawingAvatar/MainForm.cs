@@ -15,7 +15,6 @@ namespace YYX.DrawingAvatar
             InitializeComponent();
             comboBoxRadius.SelectedIndex = 3;
             buttonOK_Click(null, null);
-            SaveImage(null, null);
         }
         private void buttonOK_Click(object sender, EventArgs e)
         {
@@ -34,10 +33,22 @@ namespace YYX.DrawingAvatar
             graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
             graphics.CompositingQuality = CompositingQuality.HighQuality;
             var pen = new Pen(Color.Black);
-            var size = new Size(sideLength, sideLength);
+            var size = new Size(sideLength - 1, sideLength - 1);
             var location = new Point(0, 0);
             var rectangle = new Rectangle(location, size);
             graphics.DrawEllipse(pen, rectangle);
+
+            var sizeHeight = size.Height / 1F;
+            var circleRadius = sizeHeight / 2F;
+            const double d = (30 / 180F) * Math.PI;
+            var sin = Math.Sin(d);
+            var cos = Math.Cos(d);
+            var sinLength = (float)(circleRadius * sin);
+            var cosLength = (float)(circleRadius * cos);
+
+            graphics.DrawArc(pen, 0F, -circleRadius, sizeHeight, sizeHeight, 30F, 120F);
+            graphics.DrawArc(pen, -(circleRadius - (circleRadius - cosLength)), sinLength, sizeHeight, sizeHeight, 270F, 120F);
+            graphics.DrawArc(pen, circleRadius - (circleRadius - cosLength), sinLength, sizeHeight, sizeHeight, 150F, 120F);
 
             pictureBox.Image = bitmap;
         }
@@ -74,7 +85,7 @@ namespace YYX.DrawingAvatar
             }
             var selectedPath = folderBrowserDialog.SelectedPath;
 
-            var filename = $"Avator-{DateTime.Now.ToString("yyyyMMddhhmmss")}.bmp";
+            var filename = $"Avator-{DateTime.Now:yyyyMMddhhmmss}.bmp";
             var path = Path.Combine(selectedPath, filename);
             bitmap.Save(path);
         }
