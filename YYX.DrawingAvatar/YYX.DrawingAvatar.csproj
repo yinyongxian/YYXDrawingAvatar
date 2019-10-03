@@ -7,7 +7,7 @@
     <ProjectGuid>{22EB077B-8120-4039-BCED-C06734DF3DB7}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>YYX.DrawingAvatar</RootNamespace>
-    <AssemblyName>YYX.DrawingAvatar</AssemblyName>
+    <AssemblyName>YYXDrawingAvatar</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
