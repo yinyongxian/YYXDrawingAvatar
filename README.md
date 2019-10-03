@@ -12,5 +12,3 @@
 <div align=center>
  <image src="/YYX.DrawingAvatar/Images/YYXDrawingAvatar.png"/>
 </div>
-
-
