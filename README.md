@@ -5,7 +5,7 @@
 
 ## 头像
 <div align=center>
- <image src="/yinyongxian/YYXDrawingAvatar/raw/master/YYX.DrawingAvatar/Images/Avator.bmp"/>
+ <image src="/YYX.DrawingAvatar/Images/Avator.bmp"/>
 </div>
 
 ## 界面
