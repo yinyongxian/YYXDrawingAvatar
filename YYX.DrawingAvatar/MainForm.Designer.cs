@@ -40,9 +40,9 @@
             this.pictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox.Location = new System.Drawing.Point(12, 41);
+            this.pictureBox.Location = new System.Drawing.Point(12, 44);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(460, 408);
+            this.pictureBox.Size = new System.Drawing.Size(960, 904);
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox.TabIndex = 0;
             this.pictureBox.TabStop = false;
@@ -51,9 +51,9 @@
             // labelRadius
             // 
             this.labelRadius.AutoSize = true;
-            this.labelRadius.Location = new System.Drawing.Point(12, 16);
+            this.labelRadius.Location = new System.Drawing.Point(12, 17);
             this.labelRadius.Name = "labelRadius";
-            this.labelRadius.Size = new System.Drawing.Size(29, 12);
+            this.labelRadius.Size = new System.Drawing.Size(31, 13);
             this.labelRadius.TabIndex = 1;
             this.labelRadius.Text = "半径";
             // 
@@ -70,17 +70,17 @@
             "256",
             "512",
             "1024"});
-            this.comboBoxRadius.Location = new System.Drawing.Point(47, 13);
+            this.comboBoxRadius.Location = new System.Drawing.Point(47, 14);
             this.comboBoxRadius.Name = "comboBoxRadius";
-            this.comboBoxRadius.Size = new System.Drawing.Size(344, 20);
+            this.comboBoxRadius.Size = new System.Drawing.Size(844, 21);
             this.comboBoxRadius.TabIndex = 2;
             // 
             // buttonOK
             // 
             this.buttonOK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOK.Location = new System.Drawing.Point(397, 11);
+            this.buttonOK.Location = new System.Drawing.Point(897, 12);
             this.buttonOK.Name = "buttonOK";
-            this.buttonOK.Size = new System.Drawing.Size(75, 23);
+            this.buttonOK.Size = new System.Drawing.Size(75, 25);
             this.buttonOK.TabIndex = 3;
             this.buttonOK.Text = "确定";
             this.buttonOK.UseVisualStyleBackColor = true;
@@ -89,9 +89,9 @@
             // MainForm
             // 
             this.AcceptButton = this.buttonOK;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(484, 461);
+            this.ClientSize = new System.Drawing.Size(984, 961);
             this.Controls.Add(this.buttonOK);
             this.Controls.Add(this.comboBoxRadius);
             this.Controls.Add(this.labelRadius);

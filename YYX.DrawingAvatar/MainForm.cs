@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 namespace YYX.DrawingAvatar
@@ -26,31 +27,45 @@ namespace YYX.DrawingAvatar
                 return;
             }
 
-            var sideLength = 2 * radius;
+            var sideLength = 4 * radius;
             bitmap = new Bitmap(sideLength, sideLength);
+
             var graphics = Graphics.FromImage(bitmap);
             graphics.SmoothingMode = SmoothingMode.HighQuality;
             graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
             graphics.CompositingQuality = CompositingQuality.HighQuality;
-            var pen = new Pen(Color.Black);
-            var size = new Size(sideLength - 1, sideLength - 1);
-            var location = new Point(0, 0);
-            var rectangle = new Rectangle(location, size);
-            graphics.DrawEllipse(pen, rectangle);
 
-            var sizeHeight = size.Height / 1F;
-            var circleRadius = sizeHeight / 2F;
-            const double d = (30 / 180F) * Math.PI;
-            var sin = Math.Sin(d);
-            var cos = Math.Cos(d);
-            var sinLength = (float)(circleRadius * sin);
-            var cosLength = (float)(circleRadius * cos);
 
-            graphics.DrawArc(pen, 0F, -circleRadius, sizeHeight, sizeHeight, 30F, 120F);
-            graphics.DrawArc(pen, -(circleRadius - (circleRadius - cosLength)), sinLength, sizeHeight, sizeHeight, 270F, 120F);
-            graphics.DrawArc(pen, circleRadius - (circleRadius - cosLength), sinLength, sizeHeight, sizeHeight, 150F, 120F);
 
+            int cx = 2 * radius;
+            int cy = 2 * radius;
+            float sin30 = (float)(radius * Math.Sin(30 * Math.PI / 180));
+            float cos30 = (float)(radius * Math.Cos(30 * Math.PI / 180));
+
+            DrawCircle(radius, graphics, cx, cy);
+            DrawCircle(radius, graphics, cx - radius, cy);
+            DrawCircle(radius, graphics, cx + radius, cy);
+            DrawCircle(radius, graphics, cx - sin30, cy - cos30);
+            DrawCircle(radius, graphics, cx - sin30, cy + cos30);
+            DrawCircle(radius, graphics, cx + sin30, cy - cos30);
+            DrawCircle(radius, graphics, cx + sin30, cy + cos30);
+     
             pictureBox.Image = bitmap;
+        }
+
+
+
+        private static void DrawCircle(int radius, Graphics graphics, float cx, float cy)
+        {
+            using (Pen pen = new Pen(Color.Black))
+            {
+                graphics.DrawEllipse(
+                    pen,
+                    cx - radius,
+                    cy - radius,
+                    radius * 2,
+                    radius * 2);
+            }
         }
 
         private void pictureBox_MouseClick(object sender, MouseEventArgs e)
