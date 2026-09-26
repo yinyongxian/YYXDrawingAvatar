@@ -40,7 +40,7 @@ namespace YYX.DrawingAvatar
                 graphics.CompositingMode = CompositingMode.SourceOver;
                 graphics.CompositingQuality = CompositingQuality.HighQuality;
 
-                float center = (imageSize - 1) / 2f;       
+                float center = (imageSize - 2) / 2f;       
                 float sin30 = (float)(radius * Math.Sin(30 * Math.PI / 180));
                 float cos30 = (float)(radius * Math.Cos(30 * Math.PI / 180));
 
@@ -60,8 +60,8 @@ namespace YYX.DrawingAvatar
 
         private static void DrawCircle(float radius, Graphics graphics, float cx, float cy, Color color)
         {
-            float drawRadius = radius - 0.5f;
-            using (Pen pen = new Pen(color))
+            float drawRadius = radius - 1f;
+            using (Pen pen = new Pen(color, 2))
             {
                 graphics.DrawEllipse(
                     pen,
