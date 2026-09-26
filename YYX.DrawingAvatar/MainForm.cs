@@ -40,10 +40,7 @@ namespace YYX.DrawingAvatar
                 graphics.CompositingMode = CompositingMode.SourceOver;
                 graphics.CompositingQuality = CompositingQuality.HighQuality;
 
-
-
-                float center = (imageSize - 1) / 2f;
-               
+                float center = (imageSize - 1) / 2f;       
                 float sin30 = (float)(radius * Math.Sin(30 * Math.PI / 180));
                 float cos30 = (float)(radius * Math.Cos(30 * Math.PI / 180));
 

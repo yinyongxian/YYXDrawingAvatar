@@ -5,10 +5,5 @@
 
 ## 头像
 <div align=center>
- <image src="/YYX.DrawingAvatar/Images/Avator.bmp"/>
-</div>
-
-## 界面
-<div align=center>
- <image src="/YYX.DrawingAvatar/Images/YYXDrawingAvatar.png"/>
+ <image src="/YYX.DrawingAvatar/Images/Avator.png"/>
 </div>
