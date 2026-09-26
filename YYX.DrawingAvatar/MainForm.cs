@@ -35,6 +35,7 @@ namespace YYX.DrawingAvatar
             using (var graphics = Graphics.FromImage(bitmap))
             {
                 graphics.Clear(Color.Transparent);
+                graphics.Clear(Color.White);
                 graphics.SmoothingMode = SmoothingMode.AntiAlias;
                 graphics.PixelOffsetMode = PixelOffsetMode.HighQuality; 
                 graphics.CompositingMode = CompositingMode.SourceOver;
