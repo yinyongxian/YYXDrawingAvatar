@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
@@ -27,42 +28,48 @@ namespace YYX.DrawingAvatar
                 return;
             }
 
-            var sideLength = 4 * radius;
-            bitmap = new Bitmap(sideLength, sideLength);
+            var imageSize = 4 * radius;
+            bitmap?.Dispose();
+            bitmap = new Bitmap(imageSize, imageSize, PixelFormat.Format32bppArgb);
 
-            var graphics = Graphics.FromImage(bitmap);
-            graphics.SmoothingMode = SmoothingMode.HighQuality;
-            graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            graphics.CompositingQuality = CompositingQuality.HighQuality;
+            using (var graphics = Graphics.FromImage(bitmap))
+            {
+                graphics.Clear(Color.Transparent);
+                graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality; 
+                graphics.CompositingMode = CompositingMode.SourceOver;
+                graphics.CompositingQuality = CompositingQuality.HighQuality;
 
 
 
-            int cx = 2 * radius;
-            int cy = 2 * radius;
-            float sin30 = (float)(radius * Math.Sin(30 * Math.PI / 180));
-            float cos30 = (float)(radius * Math.Cos(30 * Math.PI / 180));
+                float center = (imageSize - 1) / 2f;
+               
+                float sin30 = (float)(radius * Math.Sin(30 * Math.PI / 180));
+                float cos30 = (float)(radius * Math.Cos(30 * Math.PI / 180));
 
-            DrawCircle(radius, graphics, cx, cy);
-            DrawCircle(radius, graphics, cx - radius, cy);
-            DrawCircle(radius, graphics, cx + radius, cy);
-            DrawCircle(radius, graphics, cx - sin30, cy - cos30);
-            DrawCircle(radius, graphics, cx - sin30, cy + cos30);
-            DrawCircle(radius, graphics, cx + sin30, cy - cos30);
-            DrawCircle(radius, graphics, cx + sin30, cy + cos30);
-     
+                DrawCircle(radius, graphics, center, center, Color.Red);
+                DrawCircle(radius, graphics, center + radius, center, Color.Orange);
+                DrawCircle(radius, graphics, center + sin30, center - cos30, Color.Yellow);
+                DrawCircle(radius, graphics, center - sin30, center - cos30, Color.Green);
+                DrawCircle(radius, graphics, center - radius, center, Color.Cyan);
+                DrawCircle(radius, graphics, center - sin30, center + cos30, Color.Blue);
+                DrawCircle(radius, graphics, center + sin30, center + cos30, Color.Purple);
+            }
+
             pictureBox.Image = bitmap;
         }
 
 
 
-        private static void DrawCircle(int radius, Graphics graphics, float cx, float cy)
+        private static void DrawCircle(float radius, Graphics graphics, float cx, float cy, Color color)
         {
-            using (Pen pen = new Pen(Color.Black))
+            float drawRadius = radius - 0.5f;
+            using (Pen pen = new Pen(color))
             {
                 graphics.DrawEllipse(
                     pen,
-                    cx - radius,
-                    cy - radius,
+                    cx - drawRadius,
+                    cy - drawRadius,
                     radius * 2,
                     radius * 2);
             }
@@ -87,22 +94,21 @@ namespace YYX.DrawingAvatar
 
         private void SaveImage(object sender, EventArgs e)
         {
-            if (bitmap == null)
-            {
-                return;
+            if (bitmap == null) 
+            { 
+                return; 
             }
-
-            var folderBrowserDialog = new FolderBrowserDialog();
-            var dialogResult = folderBrowserDialog.ShowDialog();
-            if (dialogResult != DialogResult.OK)
+            using (var folderBrowserDialog = new FolderBrowserDialog())
             {
-                return;
-            }
-            var selectedPath = folderBrowserDialog.SelectedPath;
+                if (folderBrowserDialog.ShowDialog() != DialogResult.OK)
+                {
+                    return;
+                }
 
-            var filename = $"Avator-{DateTime.Now:yyyyMMddhhmmss}.bmp";
-            var path = Path.Combine(selectedPath, filename);
-            bitmap.Save(path);
+                string filename = $"Avatar-{DateTime.Now:yyyyMMddHHmmss}.png"; 
+                string path = Path.Combine(folderBrowserDialog.SelectedPath, filename); 
+                bitmap.Save(path, ImageFormat.Png);
+            }
         }
     }
 }
